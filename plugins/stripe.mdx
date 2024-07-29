@@ -1,88 +1,101 @@
 ---
 title: "Stripe Checkout"
-description: "Text, title, and styling in standard markdown"
+description: "This plugin simplifies developing a checkout for multiple items."
 icon: "stripe"
 ---
 
-## Titles
+## Introduction
 
-Best used for section headers.
+The plugin is accessed via a paid subscription, as our agency offers support in case of any issues. We keep the plugin updated and plan to add new features.
 
-```md
-## Titles
-```
+## Checkout Action
 
-### Subtitles
+This action allows to create a new `Checkout Session` and redirect the user to Stripe to finalize the payment.
 
-Best use to subsection headers.
+### Properties
 
-```md
-### Subtitles
-```
+<ResponseField name="Product List" type="List of objects" required>
+  List of user's products for checkout. 
+  
+  Objects can have custom fields as long as they also include fields listed below.
 
-<Tip>
+  <Expandable title="Fields">
+    <ResponseField name="Price ID" type="text">
+      The ID of Stripe's price object. You can find it in Stripe's dashboard under Product details.
 
-Each **title** and **subtitle** creates an anchor and also shows up on the table of contents on the right.
+      Example: `price_2PrvgHGho9zaQGvAh4eXPr3C`
+    </ResponseField>
 
-</Tip>
+    <ResponseField name="Quantity" type="number">
+      The number that specifies quantity of each product.
 
-## Text Formatting
+      Example: `2`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
 
-We support most markdown formatting. Simply add `**`, `_`, or `~` around text to format it.
+<ResponseField name="Success URL" type="text" required>
+  URL that appears after successful payment.
 
-| Style         | How to write it   | Result          |
-| ------------- | ----------------- | --------------- |
-| Bold          | `**bold**`        | **bold**        |
-| Italic        | `_italic_`        | _italic_        |
-| Strikethrough | `~strikethrough~` | ~strikethrough~ |
+  Example: `https://www.example.com/confirmation`
+</ResponseField>
 
-You can combine these. For example, write `**_bold and italic_**` to get **_bold and italic_** text.
+<ResponseField name="Return URL" type="text" required>
+  URL that appears after cancelation of checkout.
 
-You need to use HTML to write superscript and subscript text. That is, add `<sup>` or `<sub>` around your text.
+  Example: `https://www.example.com/checkout`
+</ResponseField>
 
-| Text Size   | How to write it          | Result                 |
-| ----------- | ------------------------ | ---------------------- |
-| Superscript | `<sup>superscript</sup>` | <sup>superscript</sup> |
-| Subscript   | `<sub>subscript</sub>`   | <sub>subscript</sub>   |
+<ResponseField name="Order ID" type="text" required>
+  The ID of Bubble's Order object. This is used to identify the order after it comes back from Stripe.
 
-## Linking to Pages
+  Example: `1621286830856x129606763226044910`
+</ResponseField>
 
-You can add a link by wrapping text in `[]()`. You would write `[link to google](https://google.com)` to [link to google](https://google.com).
+<ResponseField name="Customer ID" type="text">
+  The ID of Stripe's Customer object. This is used to to manage customer data for future payments.
 
-Links to pages in your docs need to be root-relative. Basically, you should include the entire folder path. For example, `[link to text](/writing-content/text)` links to the page "Text" in our components section.
+  Example: `cus_OTiqVCyyhjyMH1`
+</ResponseField>
 
-Relative links like `[link to text](../text)` will open slower because we cannot optimize them as easily.
+<ResponseField name="Invoice Creation" type="yes / no" required>
+  Flag that determines whether we create an invoice after the payment.
 
-## Blockquotes
+  Default: `yes`
+</ResponseField>
 
-### Singleline
+<Warning>
+  Remember that each Order object should have **Price ID** and **Quantity** fields.
+</Warning>
 
-To create a blockquote, add a `>` in front of a paragraph.
+## Step by Step Integration Guide
 
-> Dorothy followed her through many of the beautiful rooms in her castle.
+This guide assumes you have a basic knowledge of Bubble's features.
 
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
-```
+<Steps>
+  <Step title="Database setup">
+    - Add 
+      <Tooltip tip="The ID of Stripe's Customer object. This is used to to      manage customer data for future payments.">Customer ID</Tooltip>
+      field to User table.
+    - Create 
+      <Tooltip tip="Table that represents each entry in your Order. It contains price and quantity of product.">Checkout Item</Tooltip>
+      table. You can add any field you want but you have to also include
+      <Tooltip tip="The ID of Stripe's price object. You can find it in Stripe's dashboard under Product details.">Price ID</Tooltip>
+      and
+      <Tooltip tip="The number that specifies quantity of each product.">Quantity</Tooltip>.
+    - Create
+      <Tooltip tip="The number that specifies quantity of each product.  ">Order</Tooltip> table. It You can add any field you want but you have to also include List of
+      <Tooltip tip="Object that represents each entry in your Order. It contains price and quantity of product.">Checkout Items</Tooltip>.
+  </Step>
+  <Step title="Create checkout button">
+    Create a button that will trigger our plugin's Checkout action. Fill out required fields. You can read more about each field in [Properties section](/plugins/stripe#Properties).
+  </Step>
+  <Step title="Set up Stripe webhook">
+    Set up Stripe webhook using a Backend Workflow. The Stripe event is called `checkout.session.completed`. 
+  </Step>
+</Steps>
 
-### Multiline
 
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+### Support
 
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-```
-
-### LaTeX
-
-Mintlify supports [LaTeX](https://www.latex-project.org) through the Latex component.
-
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-
-```md
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-```
+In case of any troubles regarding the plugin, we offer full support. Simply send us an email using `Support` button.
