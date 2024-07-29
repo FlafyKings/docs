@@ -10,7 +10,7 @@ The plugin is accessed via a paid subscription, as our agency offers support in 
 
 ## Checkout Action
 
-This action allows to create a new `Checkout Session` and redirect the user to Stripe to finalize the payment.
+This action allows you to create a new `Checkout Session` and redirect the user to Stripe to finalize the payment.
 
 ### Properties
 
@@ -31,73 +31,94 @@ This action allows to create a new `Checkout Session` and redirect the user to S
 
       Example: `2`
     </ResponseField>
+
   </Expandable>
 </ResponseField>
 
 <ResponseField name="Success URL" type="text" required>
   URL that appears after successful payment.
 
-  Example: `https://www.example.com/confirmation`
+Example: `https://www.example.com/confirmation`
+
 </ResponseField>
 
 <ResponseField name="Return URL" type="text" required>
-  URL that appears after cancelation of checkout.
+  URL that appears after cancellation of checkout.
 
-  Example: `https://www.example.com/checkout`
+Example: `https://www.example.com/checkout`
+
 </ResponseField>
 
 <ResponseField name="Order ID" type="text" required>
   The ID of Bubble's Order object. This is used to identify the order after it comes back from Stripe.
 
-  Example: `1621286830856x129606763226044910`
+Example: `1621286830856x129606763226044910`
+
 </ResponseField>
 
 <ResponseField name="Customer ID" type="text">
-  The ID of Stripe's Customer object. This is used to to manage customer data for future payments.
+  The ID of Stripe's Customer object. This is used to manage customer data for future payments.
 
-  Example: `cus_OTiqVCyyhjyMH1`
+Example: `cus_OTiqVCyyhjyMH1`
+
 </ResponseField>
 
 <ResponseField name="Invoice Creation" type="yes / no" required>
   Flag that determines whether we create an invoice after the payment.
 
-  Default: `yes`
+Default: `yes`
+
 </ResponseField>
 
 <Warning>
-  Remember that each Order object should have **Price ID** and **Quantity** fields.
+  Remember that each Order object should have **Price ID** and **Quantity**
+  fields.
 </Warning>
 
 ## Step by Step Integration Guide
 
 <Info>
-  **Prerequisite** This guide assumes you have a basic knowledge of Bubble's features.
+  **Prerequisite** This guide assumes you have a basic knowledge of Bubble's
+  features.
 </Info>
 
 <Steps>
   <Step title="Database setup">
-    - Add 
-      <Tooltip tip="The ID of Stripe's Customer object. This is used to to      manage customer data for future payments.">Customer ID</Tooltip>
-      field to User table.
-    - Create 
-      <Tooltip tip="Table that represents each entry in your Order. It contains price and quantity of product.">Checkout Item</Tooltip>
-      table. You can add any field you want but you have to also include
-      <Tooltip tip="The ID of Stripe's price object. You can find it in Stripe's dashboard under Product details.">Price ID</Tooltip>
-      and
-      <Tooltip tip="The number that specifies quantity of each product.">Quantity</Tooltip>.
-    - Create
-      <Tooltip tip="The number that specifies quantity of each product.  ">Order</Tooltip> table. It You can add any field you want but you have to also include List of
-      <Tooltip tip="Object that represents each entry in your Order. It contains price and quantity of product.">Checkout Items</Tooltip>.
+    - Add
+    <Tooltip tip="The ID of Stripe's Customer object. This is used to to      manage customer data for future payments.">
+      Customer ID
+    </Tooltip>
+    field to User table. - Create
+    <Tooltip tip="Table that represents each entry in your Order. It contains price and quantity of product.">
+      Checkout Item
+    </Tooltip>
+    table. You can add any field you want but you have to also include
+    <Tooltip tip="The ID of Stripe's price object. You can find it in Stripe's dashboard under Product details.">
+      Price ID
+    </Tooltip>
+    and
+    <Tooltip tip="The number that specifies quantity of each product.">
+      Quantity
+    </Tooltip>. - Create
+    <Tooltip tip="The number that specifies quantity of each product.  ">
+      Order
+    </Tooltip>{" "}
+    table. You can add any field you want but you have to also include List of
+    <Tooltip tip="Object that represents each entry in your Order. It contains price and quantity of product.">
+      Checkout Items
+    </Tooltip>.
   </Step>
   <Step title="Create checkout button">
-    Create a button that will trigger our plugin's Checkout action. Fill out required fields. You can read more about each field in [Properties section](/plugins/stripe#properties).
+    Create a button that will trigger our plugin's Checkout action. Fill out
+    required fields. You can read more about each field in [Properties
+    section](/plugins/stripe#properties).
   </Step>
   <Step title="Set up Stripe webhook">
-    Set up Stripe webhook using a Backend Workflow. The Stripe event is called `checkout.session.completed`. 
+    Set up Stripe webhook using a Backend Workflow. The Stripe event is called
+    `checkout.session.completed`.
   </Step>
 </Steps>
 
-
 ### Support
 
-In case of any troubles regarding the plugin, we offer full support. Simply send us an email using `Support` button.
+In case of any troubles related to the plugin, we offer full support. Simply send us an email using `Support` button.
