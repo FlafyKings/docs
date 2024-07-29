@@ -70,7 +70,9 @@ This action allows to create a new `Checkout Session` and redirect the user to S
 
 ## Step by Step Integration Guide
 
-This guide assumes you have a basic knowledge of Bubble's features.
+<Info>
+  **Prerequisite** This guide assumes you have a basic knowledge of Bubble's features.
+</Info>
 
 <Steps>
   <Step title="Database setup">
@@ -88,7 +90,7 @@ This guide assumes you have a basic knowledge of Bubble's features.
       <Tooltip tip="Object that represents each entry in your Order. It contains price and quantity of product.">Checkout Items</Tooltip>.
   </Step>
   <Step title="Create checkout button">
-    Create a button that will trigger our plugin's Checkout action. Fill out required fields. You can read more about each field in [Properties section](/plugins/stripe#Properties).
+    Create a button that will trigger our plugin's Checkout action. Fill out required fields. You can read more about each field in [Properties section](/plugins/stripe#properties).
   </Step>
   <Step title="Set up Stripe webhook">
     Set up Stripe webhook using a Backend Workflow. The Stripe event is called `checkout.session.completed`. 
