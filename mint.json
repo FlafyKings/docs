@@ -29,12 +29,7 @@
     {
       "name": "Bubble Profile",
       "icon": "building",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "url": "https://bubble.io/agency/betterside-dev"
     }
   ],
   "navigation": [
