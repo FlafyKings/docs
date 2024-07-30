@@ -49,17 +49,17 @@ Example: `https://www.example.com/checkout`
 
 </ResponseField>
 
-<ResponseField name="Order ID" type="text" required>
-  The ID of Bubble's Order object. This is used to identify the order after it comes back from Stripe.
-
-Example: `1621286830856x129606763226044910`
-
-</ResponseField>
-
 <ResponseField name="Customer ID" type="text">
   The ID of Stripe's Customer object. This is used to manage customer data for future payments.
 
 Example: `cus_OTiqVCyyhjyMH1`
+
+</ResponseField>
+
+<ResponseField name="Client Reference ID" type="text">
+  Unique ID of Bubble's User object that helps to identify the user after the checkout session.
+
+Example: `1621286830856x129606763226044910`
 
 </ResponseField>
 
