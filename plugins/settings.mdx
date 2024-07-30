@@ -15,24 +15,7 @@ Example: `mintlify`
 
 </ResponseField>
 
-<ResponseField name="navigation" type="Navigation[]" required>
-  An array of groups with all the pages within that group
-  <Expandable title="Navigation">
-    <ResponseField name="group" type="string">
-    The name of the group.
 
-    Example: `Settings`
-
-    </ResponseField>
-    <ResponseField name="pages" type="string[]">
-    The relative paths to the markdown files that will serve as pages.
-
-    Example: `["customization", "page"]`
-
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
 
 <ResponseField name="logo" type="string or object">
   Path to logo image or object with path to "light" and "dark" mode logo images
@@ -113,10 +96,43 @@ Example: `mintlify`
   </Expandable>
 </ResponseField>
 
-<ResponseField name="versions" type="string[]">
-  Array of version names. Only use this if you want to show different versions
-  of docs with a dropdown in the navigation bar.
-</ResponseField>
+<Steps>
+  <Step title="Database setup">
+    - Add
+    <Tooltip tip="The ID of Stripe's Customer object. This is used to to      manage customer data for future payments.">
+      Customer ID
+    </Tooltip>
+    field to User table. - Create
+    <Tooltip tip="Table that represents each entry in your Order. It contains price and quantity of product.">
+      Checkout Item
+    </Tooltip>
+    table. You can add any field you want but you have to also include
+    <Tooltip tip="The ID of Stripe's price object. You can find it in Stripe's dashboard under Product details.">
+      Price ID
+    </Tooltip>
+    and
+    <Tooltip tip="The number that specifies quantity of each product.">
+      Quantity
+    </Tooltip>
+    - Create
+    <Tooltip tip="The number that specifies quantity of each product.  ">
+      Order
+    </Tooltip>
+    table. You can add any field you want but you have to also include List of
+    <Tooltip tip="Object that represents each entry in your Order. It contains price and quantity of product.">
+      Checkout Items
+    </Tooltip>.
+  </Step>
+  <Step title="Create checkout button">
+    Create a button that will trigger our plugin's Checkout action. Fill out
+    required fields. You can read more about each field in [Properties
+    section](/plugins/stripe#properties).
+  </Step>
+  <Step title="Set up Stripe webhook">
+    Set up Stripe webhook using a Backend Workflow. The Stripe event is called
+    `checkout.session.completed`.
+  </Step>
+</Steps>
 
 <ResponseField name="anchors" type="Anchor[]">
   An array of the anchors, includes the `icon`, `color`, and `url`.
